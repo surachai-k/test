@@ -7,7 +7,7 @@
       width="620"
       height="440"
       controls
-      :src="`http://54.169.131.49:8081/api/player/${contentId}`"
+      :src="config.public.realMediaPlayer + '/' + contentId"
     ></video>
   </div>
 </template>
@@ -15,6 +15,7 @@
 <script setup>
 import { useRoute } from "vue-router";
 
+const config = useRuntimeConfig();
 const route = useRoute();
 const contentId = route.params.id;
 </script>
