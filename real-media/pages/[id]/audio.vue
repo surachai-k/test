@@ -3,10 +3,17 @@
     <h3>Audio</h3>
     Content id:{{ contentId }}
     <br />
+    <button @click="handleDownload" type="button">Download media</button>
+    <br />
     <audio
+      ref="audio"
+      width="620"
+      height="440"
       controls
-      :src="config.public.realMediaPlayer + '/' + contentId"
-    ></audio>
+      controlslist="nodownload"
+    >
+      <source :src="config.public.realMediaPlayer + '/' + contentId" />
+    </audio>
   </div>
 </template>
 
@@ -16,6 +23,17 @@ import { useRoute } from "vue-router";
 const config = useRuntimeConfig();
 const route = useRoute();
 const contentId = route.params.id;
+const audio = ref(null);
+
+const handleDownload = () => {
+  const downloadUrl = `https://rsmedia.realsmart.co.th/b/media/download/${contentId}`;
+  const link = document.createElement("a");
+  link.href = downloadUrl;
+  link.download = "custom-video.mp4";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
 </script>
 
 <style lang="scss" scoped></style>
