@@ -2,7 +2,7 @@
   <div>
     <h3>Video</h3>
     Content id:{{ contentId }}
-    <br>
+    <br />
     <button @click="handleDownload" type="button">Download media</button>
     <br />
     <video
@@ -12,7 +12,7 @@
       controls
       controlslist="nodownload"
     >
-      <source :src="config.public.realMediaPlayer + '/' + contentId" />
+      <source :src="config.public.realMediaPlayer + '/auth/player/' + contentId" />
     </video>
   </div>
 </template>
@@ -26,7 +26,7 @@ const contentId = route.params.id;
 const video = ref(null);
 
 const handleDownload = () => {
-  const downloadUrl = `https://rsmedia.realsmart.co.th/b/media/download/${contentId}`;
+  const downloadUrl = `${config.public.realMediaPlayer}/auth/download/${contentId}`;
   const link = document.createElement("a");
   link.href = downloadUrl;
   link.download = "custom-video.mp4";

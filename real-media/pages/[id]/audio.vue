@@ -12,7 +12,7 @@
       controls
       controlslist="nodownload"
     >
-      <source :src="config.public.realMediaPlayer + '/' + contentId" />
+      <source :src="config.public.realMediaPlayer + '/auth/player/' + contentId" />
     </audio>
   </div>
 </template>
@@ -26,7 +26,7 @@ const contentId = route.params.id;
 const audio = ref(null);
 
 const handleDownload = () => {
-  const downloadUrl = `https://rsmedia.realsmart.co.th/b/media/download/${contentId}`;
+  const downloadUrl = `${config.public.realMediaPlayer}/auth/download/${contentId}`;
   const link = document.createElement("a");
   link.href = downloadUrl;
   link.download = "custom-video.mp4";
