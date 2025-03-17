@@ -43,19 +43,20 @@ const handleLogin = async () => {
     ).data;
 
     if (response.token) {
-      const result = await axios.get(
-        `https://rsmedia.realsmart.co.th${redirect}`,
-        {
-          headers: {
-            Authorization: `${response.token}`,
-          },
-        }
-      );
+      //   const result = await axios.get(
+      //     `https://rsmedia.realsmart.co.th${redirect}`,
+      //     {
+      //       headers: {
+      //         Authorization: `${response.token}`,
+      //       },
+      //     }
+      //   );
 
-      // Axios won't handle redirects automatically, so manually navigate
-      if (result.status === 200) {
-        window.location.href = `https://rsmedia.realsmart.co.th${redirect}`;
-      }
+      //   // Axios won't handle redirects automatically, so manually navigate
+      //   if (result.status === 200) {
+      window.location.href = `https://rsmedia.realsmart.co.th${redirect}?token=${response.token}`;
+      // `https://rsmedia.realsmart.co.th${redirect}`;
+      //   }
     }
   }
 };
