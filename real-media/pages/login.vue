@@ -56,7 +56,7 @@ const handleLogin = async () => {
       //   if (result.status === 200) {
       window.open(
         `https://rsmedia.realsmart.co.th${redirect}?token=${response.token}`,
-        "_self"
+        "_blank"
       );
       //   window.location.replace(
       //     `https://rsmedia.realsmart.co.th${redirect}?token=${response.token}`
