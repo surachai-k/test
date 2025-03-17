@@ -54,10 +54,14 @@ const handleLogin = async () => {
 
       //   // Axios won't handle redirects automatically, so manually navigate
       //   if (result.status === 200) {
-      window.location.replace(
-        `https://rsmedia.realsmart.co.th${redirect}?token=${response.token}`
+      window.open(
+        `https://rsmedia.realsmart.co.th${redirect}?token=${response.token}`,
+        "_self"
       );
-    //   window.location.href = `https://rsmedia.realsmart.co.th${redirect}?token=${response.token}`;
+      //   window.location.replace(
+      //     `https://rsmedia.realsmart.co.th${redirect}?token=${response.token}`
+      //   );
+      //   window.location.href = `https://rsmedia.realsmart.co.th${redirect}?token=${response.token}`;
       // `https://rsmedia.realsmart.co.th${redirect}`;
       //   }
     }
