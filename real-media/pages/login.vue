@@ -2,7 +2,6 @@
   <div class="login-page">
     <h2>Login</h2>
     <div class="form-container">
-      <input type="text" placeholder="username" v-model="username" required />
       <input
         type="password"
         placeholder="password"
@@ -20,9 +19,9 @@
 <script setup>
 import axios from "axios";
 
+const route = useRoute();
 const config = useRuntimeConfig();
 
-const username = ref("");
 const password = ref("");
 const users = [
   {
@@ -35,15 +34,29 @@ const users = [
   },
 ];
 const handleLogin = async () => {
-  if (username.value && password.value) {
+  if (password.value) {
+    const redirect = route.query.redirect;
     const response = (
       await axios.post(`${config.public.realMediaPlayer}/loginToken`, {
-        user: username.value,
         password: password.value,
       })
     ).data;
 
-    console.log(response);
+    if (response.token) {
+      const result = await axios.get(
+        `https://rsmedia.realsmart.co.th${redirect}`,
+        {
+          headers: {
+            Authorization: `${response.token}`,
+          },
+        }
+      );
+
+      // Axios won't handle redirects automatically, so manually navigate
+      if (result.status === 200) {
+        window.location.href = `https://rsmedia.realsmart.co.th${redirect}`;
+      }
+    }
   }
 };
 </script>
