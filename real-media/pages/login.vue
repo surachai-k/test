@@ -21,6 +21,7 @@ import axios from "axios";
 
 const route = useRoute();
 const config = useRuntimeConfig();
+const cookie = useCookie("token");
 
 const password = ref("");
 const users = [
@@ -43,27 +44,11 @@ const handleLogin = async () => {
     ).data;
 
     if (response.token) {
-      //   const result = await axios.get(
-      //     `https://rsmedia.realsmart.co.th${redirect}`,
-      //     {
-      //       headers: {
-      //         Authorization: `${response.token}`,
-      //       },
-      //     }
-      //   );
+      cookie.value = response.token;
 
-      //   // Axios won't handle redirects automatically, so manually navigate
-      //   if (result.status === 200) {
-      window.open(
-        `https://rsmedia.realsmart.co.th${redirect}?token=${response.token}`,
-        "_blank"
-      );
-      //   window.location.replace(
-      //     `https://rsmedia.realsmart.co.th${redirect}?token=${response.token}`
-      //   );
-      //   window.location.href = `https://rsmedia.realsmart.co.th${redirect}?token=${response.token}`;
-      // `https://rsmedia.realsmart.co.th${redirect}`;
-      //   }
+      navigateTo(`${config.public.realMediaPlayer}${redirect}`, {
+        external: true,
+      });
     }
   }
 };
