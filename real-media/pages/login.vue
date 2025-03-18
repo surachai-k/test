@@ -22,6 +22,7 @@ import axios from "axios";
 const route = useRoute();
 const config = useRuntimeConfig();
 const cookie = useCookie("token");
+const domain = useCookie("rsmedia");
 
 const password = ref("");
 const users = [
@@ -46,7 +47,8 @@ const handleLogin = async () => {
     if (response.token) {
       cookie.value = response.token;
 
-      navigateTo(`${config.public.realMediaPlayer}${redirect}`, {
+      // window.location.href = `${config.public.realMediaPlayer}${redirect}`;
+      await navigateTo(`${config.public.realMediaPlayer}${redirect}`, {
         external: true,
       });
     }
